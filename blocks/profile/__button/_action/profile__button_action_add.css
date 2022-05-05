@@ -6,3 +6,15 @@
   box-sizing: border-box;
   border-radius: 2px;
 }
+
+@media screen and (max-width: 700px) {
+  .profile__button_action_add {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__button_action_add {
+    width: 100%;
+  }
+}

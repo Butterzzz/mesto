@@ -1,3 +1,9 @@
 .profile__info {
   margin-right: auto;
 }
+
+@media screen and (max-width: 700px){
+  .profile__info {
+    margin: 0 auto 36px;
+  }
+}

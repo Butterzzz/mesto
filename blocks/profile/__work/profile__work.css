@@ -7,3 +7,11 @@
   overflow: hidden;
   margin: 0;
 }
+
+@media screen and (max-width: 700px){
+  .profile__work {
+    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
