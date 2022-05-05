@@ -1,0 +1,6 @@
+.form__input-container {
+  width: calc(100% - 36px * 2);
+  margin: 0 auto;
+  padding: 54px 0 48px;
+  border: 0;
+}

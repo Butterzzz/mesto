@@ -1,0 +1,11 @@
+.form__button_action_save {
+  width: calc(100% - 36px * 2);
+  min-height: 50px;
+  background: #000;
+  border-radius: 2px;
+  margin: 0 auto 37px;
+}
+
+.form__button_action_save:hover {
+  opacity: .8;
+}

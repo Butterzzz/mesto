@@ -1,0 +1,8 @@
+.form__button_action_close {
+  background: url(../../../../images/button-close.svg) no-repeat center / cover;
+  position: absolute;
+  top: -74px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+}
