@@ -1,0 +1,10 @@
+.card__button_action_like {
+  flex-shrink: 0;
+  width: 22px;
+  height: 19px;
+  background: url(../../../../images/button-like.svg) no-repeat center;
+}
+
+.card__button_action_like:hover {
+  opacity: 0.5;
+}

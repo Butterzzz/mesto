@@ -11,16 +11,114 @@
 <body class="page">
 
   <header class="header">
-
+    <img class="header__logo" src="./images/header-logo.svg" alt="Логотип сервиса Mesto" >
   </header>
 
   <main>
 
+    <section class="profile">
+
+      <div class="profile__avatar">
+        <img class="profile__image" src="./images/avatar.jpg" alt="Изображение профиля">
+      </div>
+
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__button profile__button_action_edit" type="button" aria-label="Редактировать профиль"></button>
+        <p class="profile__work">Исследователь океана</p>
+      </div>
+
+      <button class="profile__button profile__button_action_add" type="button" aria-label="Добавить фотографии"></button>
+
+    </section>
+
+    <section class="cards" aria-label="Карточки мест">
+      <ul class="card-list-container">
+
+        <li class="card-list-container__item">
+          <article class="card">
+            <img class="card__image" src="./images/card-01.jpg" alt="Владивосток">
+            <div class="card__description">
+              <h2 class="card__title">Владивосток</h2>
+              <button class="card__button card__button_action_like" type="button"></button>
+            </div>
+          </article>
+        </li>
+
+
+        <li class="card-list-container__item">
+          <article class="card">
+            <img class="card__image" src="./images/card-02.jpg" alt="Москва">
+            <div class="card__description">
+              <h2 class="card__title">Москва</h2>
+              <button class="card__button card__button_action_like" type="button"></button>
+            </div>
+          </article>
+        </li>
+
+        <li class="card-list-container__item">
+          <article class="card">
+            <img class="card__image" src="./images/card-03.jpg" alt="Хабаровск">
+            <div class="card__description">
+              <h2 class="card__title">Хабаровск</h2>
+              <button class="card__button card__button_action_like" type="button"></button>
+            </div>
+          </article>
+        </li>
+
+        <li class="card-list-container__item">
+          <article class="card">
+            <img class="card__image" src="./images/card-04.jpg" alt="Благовещенск">
+            <div class="card__description">
+              <h2 class="card__title">Благовещенск</h2>
+              <button class="card__button card__button_action_like" type="button"></button>
+            </div>
+          </article>
+        </li>
+
+        <li class="card-list-container__item">
+          <article class="card">
+            <img class="card__image" src="./images/card-05.jpg" alt="Санкт-Петербург">
+            <div class="card__description">
+              <h2 class="card__title">Санкт-Петербург</h2>
+              <button class="card__button card__button_action_like" type="button"></button>
+            </div>
+          </article>
+        </li>
+
+        <li class="card-list-container__item">
+          <article class="card">
+            <img class="card__image" src="./images/card-06.jpg" alt="Казань">
+            <div class="card__description">
+              <h2 class="card__title">Казань</h2>
+              <button class="card__button card__button_action_like" type="button"></button>
+            </div>
+          </article>
+        </li>
+
+      </ul>
+    </section>
+
   </main>
 
   <footer class="footer">
-
+    <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
 
+  <div class="popup">
+    <div class="popup__container">
+      <form class="form">
+        <h2 class="form__heading">Редактировать профиль</h2>
+        <fieldset class="form__input-container">
+          <input class="form__item form__item_type_name" type="text" name="name" minlength="2" maxlength="40" placeholder="Имя" required>
+          <input class="form__item form__item_type_work" type="text" name="work" minlength="2" maxlength="40" placeholder="О себе" required>
+        </fieldset>
+        <button class="form__button form__button_action_save" type="submit">Сохранить</button>
+        <button class="form__button form__button_action_close" type="button" aria-label="закрыть форму"></button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./pages/index.js"></script>
 </body>
 </html>

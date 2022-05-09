@@ -1,0 +1,21 @@
+.form__button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  outline: none;
+  display: block;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #FFF;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.form__button:hover {
+  opacity: .6;
+}
