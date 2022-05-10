@@ -4,6 +4,11 @@
   background: #000;
   border-radius: 2px;
   margin: 0 auto 37px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
 }
 
 .form__button_action_save:hover {
@@ -15,5 +20,7 @@
     width: calc(100% - 22px * 2);
     min-height: 46px;
     margin: 0 auto 25px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

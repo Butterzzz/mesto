@@ -1,4 +1,4 @@
-.card-list-container {
+.cards__list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 425px) {
-  .card-list-container {
+  .cards__list {
     gap: 20px 0;
   }
 }

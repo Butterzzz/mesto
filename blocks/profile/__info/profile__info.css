@@ -1,5 +1,5 @@
 .profile__info {
-  max-width: 500px;
+  max-width: 336px;
   display: grid;
   grid-template-columns: auto 24px;
   grid-template-areas: "name button"
