@@ -1,6 +1,6 @@
 const popup = document.querySelector('.popup');
 const openButton = document.querySelector('.profile__button_action_edit');
-const closeButton = document.querySelector('.form__button_action_close');
+const closeButton = document.querySelector('.popup__button_action_close');
 const profileName = document.querySelector('.profile__name');
 const profileWork = document.querySelector('.profile__work');
 // Находим форму в DOM
