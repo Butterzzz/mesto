@@ -14,7 +14,7 @@ const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
   {
     name: 'Владивосток',
-    link: './images/card-01.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-01.jpg',
     alt: 'Владивосток'
   },
   {
