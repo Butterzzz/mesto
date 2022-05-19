@@ -3,16 +3,60 @@ const openButton = document.querySelector('.profile__button_action_edit');
 const closeButton = document.querySelector('.popup__button_action_close');
 const profileName = document.querySelector('.profile__name');
 const profileWork = document.querySelector('.profile__work');
-// Находим форму в DOM
+
 const formElement = document.querySelector('.form');
-// Находим поля формы в DOM
 let nameInput = formElement.querySelector('.form__item_type_name');
 let workInput = formElement.querySelector('.form__item_type_work');
+
+//1. Шесть карточек «из коробки»
+const cardsList = document.querySelector('.cards__list');
+const cardTemplate = document.querySelector('.card-template').content;
+const initialCards = [
+  {
+    name: 'Владивосток',
+    link: './images/card-01.jpg',
+    alt: 'Владивосток'
+  },
+  {
+    name: 'Москва',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-02.jpg',
+    alt: 'Москва'
+  },
+  {
+    name: 'Хабаровск',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-03.jpg',
+    alt: 'Хабаровск'
+  },
+  {
+    name: 'Благовещенск',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-04.jpg',
+    alt: 'Благовещенск'
+  },
+  {
+    name: 'Санкт-Петербург',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-05.jpg',
+    alt: 'Санкт-Петербург'
+  },
+  {
+    name: 'Казань',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-06.jpg',
+    alt: 'Казань'
+  }
+];
+
+initialCards.forEach((element) => {
+  const cardElement = cardTemplate.cloneNode(true);
+
+  cardElement.querySelector('.card__title').textContent = element.name;
+  cardElement.querySelector('.card__image').src = element.link;
+  cardElement.querySelector('.card__image').alt = element.alt;
+
+  cardsList.append(cardElement);
+});
 
 const togglePopup = function (event) {
   popup.classList.toggle("popup_opened");
   if (popup.classList.contains("popup_opened")) {
-  // Получаем значение полей workInput и nameInput из свойства value
   nameInput.value = profileName.textContent;
   workInput.value = profileWork.textContent;
   }
@@ -25,8 +69,6 @@ closeButton.addEventListener('click', togglePopup);
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
   evt.preventDefault();  // Отменяем стандартную отправку формы
-
-// Вставляем новые значения с помощью textContent
   profileName.textContent = nameInput.value;
   profileWork.textContent = workInput.value;
   togglePopup();

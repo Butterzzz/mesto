@@ -33,67 +33,6 @@
     <section class="cards" aria-label="Карточки мест">
       <ul class="cards__list">
 
-        <li class="cards__item">
-          <article class="card">
-            <img class="card__image" src="./images/card-01.jpg" alt="Владивосток">
-            <div class="card__description">
-              <h2 class="card__title">Владивосток</h2>
-              <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </article>
-        </li>
-
-
-        <li class="cards__item">
-          <article class="card">
-            <img class="card__image" src="./images/card-02.jpg" alt="Москва">
-            <div class="card__description">
-              <h2 class="card__title">Москва</h2>
-              <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </article>
-        </li>
-
-        <li class="cards__item">
-          <article class="card">
-            <img class="card__image" src="./images/card-03.jpg" alt="Хабаровск">
-            <div class="card__description">
-              <h2 class="card__title">Хабаровск</h2>
-              <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </article>
-        </li>
-
-        <li class="cards__item">
-          <article class="card">
-            <img class="card__image" src="./images/card-04.jpg" alt="Благовещенск">
-            <div class="card__description">
-              <h2 class="card__title">Благовещенск</h2>
-              <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </article>
-        </li>
-
-        <li class="cards__item">
-          <article class="card">
-            <img class="card__image" src="./images/card-05.jpg" alt="Санкт-Петербург">
-            <div class="card__description">
-              <h2 class="card__title">Санкт-Петербург</h2>
-              <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </article>
-        </li>
-
-        <li class="cards__item">
-          <article class="card">
-            <img class="card__image" src="./images/card-06.jpg" alt="Казань">
-            <div class="card__description">
-              <h2 class="card__title">Казань</h2>
-              <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </article>
-        </li>
-
       </ul>
     </section>
 
@@ -103,7 +42,8 @@
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+ <!-- Popup редактирование профиля -->
+   <div class="popup">
     <div class="popup__container">
       <form class="form" name="edit-profile">
         <h2 class="form__heading">Редактировать профиль</h2>
@@ -116,6 +56,20 @@
       <button class="popup__button popup__button_action_close" type="button" aria-label="Закрыть форму"></button>
     </div>
   </div>
+
+ <!-- Шаблон карточки -->
+ <template class="card-template">
+  <li class="cards__item">
+    <article class="card">
+      <img class="card__image" src="" alt="">
+      <div class="card__description">
+        <h2 class="card__title"></h2>
+        <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
+      </div>
+      <button class="card__button card__button_action_delete" aria-label="Удалить карточку"></button>
+    </article>
+  </li>
+</template>
 
   <script src="./pages/index.js"></script>
 </body>
