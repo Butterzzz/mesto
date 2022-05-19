@@ -43,7 +43,7 @@
   </footer>
 
  <!-- Popup редактирование профиля -->
-   <div class="popup">
+   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <form class="form" name="edit-profile">
         <h2 class="form__heading">Редактировать профиль</h2>
@@ -56,6 +56,21 @@
       <button class="popup__button popup__button_action_close" type="button" aria-label="Закрыть форму"></button>
     </div>
   </div>
+
+<!-- Popup добавление карточки -->
+<div class="popup popup_type_add-card">
+  <div class="popup__container">
+    <form class="form" name="add-place">
+      <h2 class="form__heading">Новое место</h2>
+      <fieldset class="form__input-container">
+        <input class="form__item form__item_type_place" type="text" name="name" minlength="2" maxlength="40" placeholder="Название" required>
+        <input class="form__item form__item_type_link" type="text" name="link" minlength="2" maxlength="40" placeholder="Ссылка на картинку" required>
+      </fieldset>
+      <button class="form__button form__button_action_save" type="submit">Создать</button>
+    </form>
+    <button class="popup__button popup__button_action_close" type="button" aria-label="Закрыть форму"></button>
+  </div>
+</div>
 
  <!-- Шаблон карточки -->
  <template class="card-template">
