@@ -57,6 +57,10 @@ function renderCard(data) {
   const cardTitle = cardElement.querySelector('.card__title');
   const cardImage = cardElement.querySelector('.card__image');
 
+  cardElement.querySelector('.card__button_action_like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__button_active');
+  });
+
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
   cardImage.alt = data.name;
