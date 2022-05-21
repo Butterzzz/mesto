@@ -1,5 +1,8 @@
 const popupProfileEdit = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupPhotoView = document.querySelector('.popup_type_photo-view');
+const popupImage = popupPhotoView.querySelector('.popup__image');
+const popupImageCaption = popupPhotoView.querySelector('.popup__image-caption');
 
 const editProfileButton = document.querySelector('.profile__button_action_edit');
 const addCardButton = document.querySelector('.profile__button_action_add');
@@ -13,8 +16,8 @@ const nameInput = formEditProfile.querySelector('.form__item_type_name');
 const workInput = formEditProfile.querySelector('.form__item_type_work');
 
 const formAddCard = document.querySelector('.form_type_add-card');
-let placeInput = formAddCard.querySelector('.form__item_type_place');
-let linkInput = formAddCard.querySelector('.form__item_type_link');
+const placeInput = formAddCard.querySelector('.form__item_type_place');
+const linkInput = formAddCard.querySelector('.form__item_type_link');
 
 const cardsList = document.querySelector('.cards__list');
 const initialCards = [
@@ -57,7 +60,7 @@ function renderCard(data) {
   const cardTitle = cardElement.querySelector('.card__title');
   const cardImage = cardElement.querySelector('.card__image');
 
-  cardElement.querySelector('.card__button_action_like').addEventListener('click', function (evt) {
+  cardElement.querySelector('.card__button_action_like').addEventListener('click', function(evt) {
     evt.target.classList.toggle('card__button_active');
   });
 
@@ -70,10 +73,19 @@ function renderCard(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
+  cardImage.addEventListener('click', imagePreviewHandler);
+
   cardsList.prepend(cardElement);
 }
 
-//popups
+function imagePreviewHandler(evt) {
+  togglePopup(popupPhotoView);
+
+  popupImage.src = evt.target.src;
+  popupImage.alt = evt.target.alt;
+  popupImageCaption.textContent = evt.target.alt;
+}
+
 function togglePopup(popupElement) {
   popupElement.classList.toggle("popup_opened");
   if (popupElement.classList.contains("popup_opened")) {
@@ -103,7 +115,7 @@ closeButtons.forEach((button) => {
 });
 
 // Обработчик «отправки» формы
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileWork.textContent = workInput.value;
@@ -111,7 +123,7 @@ function formSubmitHandler (evt) {
 }
 
 // Обработчик добавления карточки
-function AddCardHandler (evt) {
+function AddCardHandler(evt) {
   evt.preventDefault();
   let name = placeInput.value;
   let link = linkInput.value;
