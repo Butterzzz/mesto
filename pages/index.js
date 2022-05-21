@@ -13,8 +13,8 @@ const nameInput = formEditProfile.querySelector('.form__item_type_name');
 const workInput = formEditProfile.querySelector('.form__item_type_work');
 
 const formAddCard = document.querySelector('.form_type_add-card');
-const placeInput = formAddCard.querySelector('.form__item_type_place');
-const linkInput = formAddCard.querySelector('.form__item_type_link');
+let placeInput = formAddCard.querySelector('.form__item_type_place');
+let linkInput = formAddCard.querySelector('.form__item_type_link');
 
 const cardsList = document.querySelector('.cards__list');
 const initialCards = [
@@ -95,11 +95,25 @@ closeButtons.forEach((button) => {
 
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
-  evt.preventDefault();  // Отменяем стандартную отправку формы
+  evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileWork.textContent = workInput.value;
   togglePopup(popupProfileEdit);
 }
 
+// Обработчик добавления карточки
+function AddCardHandler (evt) {
+  evt.preventDefault();
+  let name = placeInput.value;
+  let link = linkInput.value;
+
+  renderCard({name, link});
+  togglePopup(popupAddCard);
+
+  placeInput.value = '';
+  linkInput.value = '';
+}
+
 renderListCard(initialCards);
 formEditProfile.addEventListener('submit', formSubmitHandler);
+formAddCard.addEventListener('submit', AddCardHandler);
