@@ -61,6 +61,11 @@ function renderCard(data) {
     evt.target.classList.toggle('card__button_active');
   });
 
+  cardElement.querySelector(".card__button_action_delete").addEventListener("click", function(evt) {
+    const deleteItem = evt.target.closest(".cards__item");
+    deleteItem.remove();
+   });
+
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
   cardImage.alt = data.name;
