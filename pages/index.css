@@ -42,7 +42,5 @@
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__item/form__item.css);
-@import url(../blocks/form/__item/_type/form__item_type_name.css);
-@import url(../blocks/form/__item/_type/form__item_type_work.css);
 @import url(../blocks/form/__button/form__button.css);
 @import url(../blocks/form/__button/_action/form__button_action_save.css);
