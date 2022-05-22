@@ -1,5 +1,8 @@
 const popupProfileEdit = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupPhotoView = document.querySelector('.popup_type_photo-view');
+const popupImage = popupPhotoView.querySelector('.popup__image');
+const popupImageCaption = popupPhotoView.querySelector('.popup__image-caption');
 
 const editProfileButton = document.querySelector('.profile__button_action_edit');
 const addCardButton = document.querySelector('.profile__button_action_add');
@@ -8,57 +11,84 @@ const closeButtons = document.querySelectorAll('.popup__button_action_close');
 const profileName = document.querySelector('.profile__name');
 const profileWork = document.querySelector('.profile__work');
 
-const formElement = document.querySelector('.form');
-let nameInput = formElement.querySelector('.form__item_type_name');
-let workInput = formElement.querySelector('.form__item_type_work');
+const formEditProfile = document.querySelector('.form_type_edit-profile');
+const nameInput = formEditProfile.querySelector('.form__item_type_name');
+const workInput = formEditProfile.querySelector('.form__item_type_work');
+
+const formAddCard = document.querySelector('.form_type_add-card');
+const placeInput = formAddCard.querySelector('.form__item_type_place');
+const linkInput = formAddCard.querySelector('.form__item_type_link');
 
 const cardsList = document.querySelector('.cards__list');
-const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
   {
-    name: 'Владивосток',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-01.jpg',
-    alt: 'Владивосток'
-  },
-  {
-    name: 'Москва',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-02.jpg',
-    alt: 'Москва'
-  },
-  {
-    name: 'Хабаровск',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-03.jpg',
-    alt: 'Хабаровск'
-  },
-  {
-    name: 'Благовещенск',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-04.jpg',
-    alt: 'Благовещенск'
+    name: 'Казань',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-06.jpg',
   },
   {
     name: 'Санкт-Петербург',
     link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-05.jpg',
-    alt: 'Санкт-Петербург'
   },
   {
-    name: 'Казань',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-06.jpg',
-    alt: 'Казань'
+    name: 'Благовещенск',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-04.jpg',
+  },
+  {
+    name: 'Хабаровск',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-03.jpg',
+  },
+  {
+    name: 'Москва',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-02.jpg',
+  },
+  {
+    name: 'Владивосток',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-01.jpg',
   }
 ];
 
-initialCards.forEach((element) => {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__title').textContent = element.name;
-  cardElement.querySelector('.card__image').src = element.link;
-  cardElement.querySelector('.card__image').alt = element.alt;
-  cardsList.append(cardElement);
-});
+function renderListCard(data) {
+  data.forEach(function (item) {
+    return renderCard(item);
+  });
+}
 
-//popups
+function renderCard(data) {
+  const cardTemplate = document.querySelector('.card-template').content;
+  const cardElement = cardTemplate.cloneNode(true);
+
+  const cardTitle = cardElement.querySelector('.card__title');
+  const cardImage = cardElement.querySelector('.card__image');
+
+  cardElement.querySelector('.card__button_action_like').addEventListener('click', function(evt) {
+    evt.target.classList.toggle('card__button_active');
+  });
+
+  cardElement.querySelector(".card__button_action_delete").addEventListener("click", function(evt) {
+    const deleteItem = evt.target.closest(".cards__item");
+    deleteItem.remove();
+   });
+
+  cardTitle.textContent = data.name;
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+
+  cardImage.addEventListener('click', imagePreviewHandler);
+
+  cardsList.prepend(cardElement);
+}
+
+function imagePreviewHandler(evt) {
+  togglePopup(popupPhotoView);
+
+  popupImage.src = evt.target.src;
+  popupImage.alt = evt.target.alt;
+  popupImageCaption.textContent = evt.target.alt;
+}
+
 function togglePopup(popupElement) {
   popupElement.classList.toggle("popup_opened");
-  if (popupElement.classList.contains("popup_opened") && popupElement.classList.contains("popup_type_edit-profile")) {
+  if (popupElement.classList.contains("popup_opened")) {
   nameInput.value = profileName.textContent;
   workInput.value = profileWork.textContent;
   }
@@ -85,12 +115,26 @@ closeButtons.forEach((button) => {
 });
 
 // Обработчик «отправки» формы
-function formSubmitHandler (evt) {
-  evt.preventDefault();  // Отменяем стандартную отправку формы
+function formSubmitHandler(evt) {
+  evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileWork.textContent = workInput.value;
   togglePopup(popupProfileEdit);
 }
 
-// Прикрепляем обработчик к форме
-formElement.addEventListener('submit', formSubmitHandler);
+// Обработчик добавления карточки
+function AddCardHandler(evt) {
+  evt.preventDefault();
+  let name = placeInput.value;
+  let link = linkInput.value;
+
+  renderCard({name, link});
+  togglePopup(popupAddCard);
+
+  placeInput.value = '';
+  linkInput.value = '';
+}
+
+renderListCard(initialCards);
+formEditProfile.addEventListener('submit', formSubmitHandler);
+formAddCard.addEventListener('submit', AddCardHandler);
