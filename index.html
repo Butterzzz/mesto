@@ -26,7 +26,7 @@
         <p class="profile__work">Исследователь океана</p>
       </div>
 
-      <button class="profile__button profile__button_action_add" type="button" aria-label="Добавить фотографии"></button>
+      <button class="profile__button profile__button_action_add" type="button" aria-label="Добавить фотографию"></button>
 
     </section>
 
@@ -63,8 +63,8 @@
     <form class="form form_type_add-card" name="add-card">
       <h2 class="form__heading">Новое место</h2>
       <fieldset class="form__input-container">
-        <input class="form__item form__item_type_place" type="text" name="name" minlength="2" maxlength="40" placeholder="Название" required>
-        <input class="form__item form__item_type_link" type="text" name="link" minlength="2" placeholder="Ссылка на картинку" required>
+        <input class="form__item form__item_type_place" type="text" name="name" minlength="1" maxlength="40" placeholder="Название" required>
+        <input class="form__item form__item_type_link" type="url" name="link" minlength="2" placeholder="Ссылка на картинку" required>
       </fieldset>
       <button class="form__button form__button_action_save" type="submit">Создать</button>
     </form>
@@ -84,7 +84,7 @@
 </div>
 
  <!-- Шаблон карточки -->
- <template class="card-template">
+ <template id="card-template">
   <li class="cards__item">
     <article class="card">
       <img class="card__image" src="#" alt="">
@@ -92,11 +92,12 @@
         <h2 class="card__title"></h2>
         <button class="card__button card__button_action_like" type="button" aria-label="Поставить лайк"></button>
       </div>
-      <button class="card__button card__button_action_delete" aria-label="Удалить карточку"></button>
+      <button class="card__button card__button_action_delete" type="button" aria-label="Удалить карточку"></button>
     </article>
   </li>
 </template>
 
-  <script src="./pages/index.js"></script>
+  <script defer src="./scripts/cards.js"></script>
+  <script defer src="./scripts/index.js"></script>
 </body>
 </html>
