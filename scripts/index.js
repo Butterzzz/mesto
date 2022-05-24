@@ -20,15 +20,10 @@ const placeInput = formAddCard.querySelector('.form__item_type_place');
 const linkInput = formAddCard.querySelector('.form__item_type_link');
 
 const cardsList = document.querySelector('.cards__list');
+const cardTemplate = document.querySelector('#card-template').content;
 
-function cloneTemplate(container) {
-  const templateCard = container.content;
-  const newCard = templateCard.firstElementChild.cloneNode(true);
-  return newCard;
-}
-
-function renderCard(data) {
-  const cardElement = cloneTemplate(document.querySelector('#card-template'));
+function createCard(data) {
+  const cardElement = cardTemplate.firstElementChild.cloneNode(true);
   const cardTitle = cardElement.querySelector('.card__title');
   const cardImage = cardElement.querySelector('.card__image');
   cardElement.querySelector('.card__button_action_like').addEventListener('click', function(evt) {
@@ -42,7 +37,12 @@ function renderCard(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardImage.addEventListener('click', () => imagePreview(cardImage));
-  cardsList.prepend(cardElement);
+  return cardElement;
+}
+
+function renderCard(cardElement) {
+  const card = createCard(cardElement);
+  cardsList.prepend(card);
 }
 
 function renderListCard(data) {
@@ -73,7 +73,7 @@ function formSubmitHandler(evt) {
 }
 
 // Обработчик добавления карточки
-function AddCardHandler(evt) {
+function addCardHandler(evt) {
   evt.preventDefault();
   const name = placeInput.value;
   const link = linkInput.value;
@@ -102,6 +102,7 @@ closeButtons.forEach((button) => {
   });
 });
 
+
 renderListCard(initialCards);
 formEditProfile.addEventListener('submit', formSubmitHandler);
-formAddCard.addEventListener('submit', AddCardHandler);
+formAddCard.addEventListener('submit', addCardHandler);
