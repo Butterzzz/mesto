@@ -22,7 +22,7 @@ const linkInput = formAddCard.querySelector('.form__item_type_link');
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card-template').content;
 
-function createCard(data) {
+function createCard({name, link}) {
   const cardElement = cardTemplate.firstElementChild.cloneNode(true);
   const cardTitle = cardElement.querySelector('.card__title');
   const cardImage = cardElement.querySelector('.card__image');
@@ -33,20 +33,19 @@ function createCard(data) {
     const deleteItem = evt.target.closest('.cards__item');
     deleteItem.remove();
    });
-  cardTitle.textContent = data.name;
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
+  cardTitle.textContent = name;
+  cardImage.src = link;
+  cardImage.alt = name;
   cardImage.addEventListener('click', () => imagePreview(cardImage));
   return cardElement;
 }
 
 function renderCard(cardElement) {
-  const card = createCard(cardElement);
-  cardsList.prepend(card);
+  cardsList.append(cardElement);
 }
 
 function renderListCard(data) {
-  data.forEach(item => renderCard(item))
+  data.forEach(card => renderCard(createCard(card)));
 }
 
 function imagePreview(data) {
@@ -77,7 +76,8 @@ function addCardHandler(evt) {
   evt.preventDefault();
   const name = placeInput.value;
   const link = linkInput.value;
-  renderCard({name, link});
+  const card = createCard({name, link});
+  cardsList.prepend(card);
   closePopup(popupAddCard);
   formAddCard.reset();
 }
