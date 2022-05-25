@@ -40,8 +40,13 @@ function createCard({name, link}) {
   return cardElement;
 }
 
-function renderCard(cardElement) {
-  cardsList.append(cardElement);
+// Добавил переменную-флажок внутри функции renderCard, чтобы управлять логикой как добавлять элементы
+function renderCard(cardElement, isPrepend = false) {
+  if(isPrepend) {
+    cardsList.prepend(cardElement);
+  } else {
+    cardsList.append(cardElement);
+  }
 }
 
 function renderListCard(data) {
@@ -76,8 +81,7 @@ function addCardHandler(evt) {
   evt.preventDefault();
   const name = placeInput.value;
   const link = linkInput.value;
-  const card = createCard({name, link});
-  cardsList.prepend(card);
+  renderCard(createCard({name, link}), true); //Добавляем карточку в начало
   closePopup(popupAddCard);
   formAddCard.reset();
 }
