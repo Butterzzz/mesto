@@ -106,7 +106,15 @@ closeButtons.forEach((button) => {
   });
 });
 
+// Закрываем открытый попап клавишей Esc
+function keyEscapeHandler(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
 
 renderListCard(initialCards);
+document.addEventListener('keydown', keyEscapeHandler);
 formEditProfile.addEventListener('submit', formSubmitHandler);
 formAddCard.addEventListener('submit', addCardHandler);
