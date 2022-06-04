@@ -62,10 +62,12 @@ function imagePreview(data) {
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', keyEscapeHandler);
 }
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyEscapeHandler);
 }
 
 // Обработчик «отправки» формы
@@ -115,6 +117,6 @@ function keyEscapeHandler(evt) {
 }
 
 renderListCard(initialCards);
-document.addEventListener('keydown', keyEscapeHandler);
+// document.addEventListener('keydown', keyEscapeHandler);
 formEditProfile.addEventListener('submit', formSubmitHandler);
 formAddCard.addEventListener('submit', addCardHandler);
