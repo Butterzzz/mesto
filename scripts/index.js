@@ -6,7 +6,7 @@ const popupImageCaption = popupPhotoView.querySelector('.popup__image-caption');
 
 const editProfileButton = document.querySelector('.profile__button_action_edit');
 const addCardButton = document.querySelector('.profile__button_action_add');
-const closeButtons = document.querySelectorAll('.popup__button_action_close');
+// const closeButtons = document.querySelectorAll('.popup__button_action_close');
 
 const profileName = document.querySelector('.profile__name');
 const profileWork = document.querySelector('.profile__work');
@@ -70,6 +70,22 @@ function closePopup(popupElement) {
   document.removeEventListener('keydown', keyEscapeHandler);
 }
 
+// Закрываем открытый попап клавишей Esc
+function keyEscapeHandler(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
+// Закрываем попап кликом на оверлей или на крестик
+function clickCloseHandler(evt) {
+  const target = evt.target;
+  if(target.classList.contains('popup__button_action_close') || target.classList.contains('popup_opened')) {
+    closePopup(evt.currentTarget);
+  };
+}
+
 // Обработчик «отправки» формы
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -99,24 +115,18 @@ addCardButton.addEventListener('click', function() {
   openPopup(popupAddCard); // открываем попап добавления
 });
 
-// Закрываем попапы кликом на крестик
-closeButtons.forEach((button) => {
-  button.addEventListener('click', function(evt) {
-    const button = evt.target;
-    const popupElement = button.closest('.popup');
-    closePopup(popupElement);
-  });
-});
-
-// Закрываем открытый попап клавишей Esc
-function keyEscapeHandler(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
+// // Закрываем попапы кликом на крестик
+// closeButtons.forEach((button) => {
+//   button.addEventListener('click', function(evt) {
+//     const button = evt.target;
+//     const popupElement = button.closest('.popup');
+//     closePopup(popupElement);
+//   });
+// });
 
 renderListCard(initialCards);
-// document.addEventListener('keydown', keyEscapeHandler);
 formEditProfile.addEventListener('submit', formSubmitHandler);
 formAddCard.addEventListener('submit', addCardHandler);
+popupProfileEdit.addEventListener('click', clickCloseHandler);
+popupAddCard.addEventListener('click', clickCloseHandler);
+popupPhotoView.addEventListener('click', clickCloseHandler);
