@@ -16,6 +16,10 @@
   overflow: hidden;
 }
 
+.popup__input:invalid {
+  border-bottom: 1px solid #FF0000;
+}
+
 .popup__input:focus {
   outline: 0;
 }
