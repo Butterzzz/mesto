@@ -45,13 +45,13 @@
  <!-- Popup редактирование профиля -->
    <div class="popup popup_type_edit-profile">
     <div class="popup__container">
-      <form class="form form_type_edit-profile" name="edit-profile">
-        <h2 class="form__heading">Редактировать профиль</h2>
-        <fieldset class="form__input-container">
-          <input class="form__item form__item_type_name" type="text" name="name" minlength="2" maxlength="40" placeholder="Имя" required>
-          <input class="form__item form__item_type_work" type="text" name="work" minlength="2" maxlength="40" placeholder="О себе" required>
+      <h2 class="popup__heading">Редактировать профиль</h2>
+      <form class="popup__form" name="editProfile">
+        <fieldset class="popup__input-container">
+          <input class="popup__input" type="text" name="name" minlength="2" maxlength="40" placeholder="Имя" required>
+          <input class="popup__input" type="text" name="work" minlength="2" maxlength="200" placeholder="О себе" required>
         </fieldset>
-        <button class="form__button form__button_action_save" type="submit">Сохранить</button>
+        <button class="popup__button popup__button_action_save" type="submit">Сохранить</button>
       </form>
       <button class="popup__button popup__button_action_close" type="button" aria-label="Закрыть форму"></button>
     </div>
@@ -60,13 +60,13 @@
 <!-- Popup добавление карточки -->
 <div class="popup popup_type_add-card">
   <div class="popup__container">
-    <form class="form form_type_add-card" name="add-card">
-      <h2 class="form__heading">Новое место</h2>
-      <fieldset class="form__input-container">
-        <input class="form__item form__item_type_place" type="text" name="name" minlength="1" maxlength="40" placeholder="Название" required>
-        <input class="form__item form__item_type_link" type="url" name="link" minlength="2" placeholder="Ссылка на картинку" required>
+    <h2 class="popup__heading">Новое место</h2>
+    <form class="popup__form" name="addCard">
+      <fieldset class="popup__input-container">
+        <input class="popup__input" type="text" name="name" minlength="2" maxlength="30" placeholder="Название" required>
+        <input class="popup__input" type="url" name="link" placeholder="Ссылка на картинку" required>
       </fieldset>
-      <button class="form__button form__button_action_save" type="submit">Создать</button>
+      <button class="popup__button popup__button_action_save popup__button_disabled" type="submit">Создать</button>
     </form>
     <button class="popup__button popup__button_action_close" type="button" aria-label="Закрыть форму"></button>
   </div>
@@ -96,7 +96,7 @@
     </article>
   </li>
 </template>
-
+  <script defer src="./scripts/validate.js"></script>
   <script defer src="./scripts/cards.js"></script>
   <script defer src="./scripts/index.js"></script>
 </body>
