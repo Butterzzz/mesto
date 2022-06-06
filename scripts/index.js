@@ -19,6 +19,36 @@ const formAddCard = document.forms.addCard;
 const placeInput = formAddCard.name;
 const linkInput = formAddCard.link;
 
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (element) => {
+  element.classList.add('popup__input_type_error');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (element) => {
+  element.classList.remove('popup__input_type_error');
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = () => {
+  if (!nameInput.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(nameInput);
+  } else {
+    // Если проходит, скроем
+    hideInputError(nameInput);
+  }
+};
+
+formEditProfile.addEventListener('submit', function (evt) {
+  // Отменим стандартное поведение по сабмиту
+  evt.preventDefault();
+});
+
+// Вызовем функцию isValid на каждый ввод символа
+nameInput.addEventListener('input', isValid);
+
+
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card-template').content;
 
