@@ -26,12 +26,33 @@ const isValid = (formElement, inputElement) => {
 // Добавление обработчиков всем полям формы
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__button');
 
+  // toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
+};
+
+// Проверяем все инпуты на валидность
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+// Настраиваем статус кнопки
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__button_disabled');
+    buttonElement.setAttribute('disabled', true);
+  } else {
+    buttonElement.classList.remove('popup__button_disabled');
+    buttonElement.removeAttribute('disabled');
+  }
 };
 
 // Добавление обработчиков всем формам

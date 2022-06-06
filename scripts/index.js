@@ -6,7 +6,6 @@ const popupImageCaption = popupPhotoView.querySelector('.popup__image-caption');
 
 const editProfileButton = document.querySelector('.profile__button_action_edit');
 const addCardButton = document.querySelector('.profile__button_action_add');
-// const closeButtons = document.querySelectorAll('.popup__button_action_close');
 
 const profileName = document.querySelector('.profile__name');
 const profileWork = document.querySelector('.profile__work');
@@ -114,14 +113,12 @@ addCardButton.addEventListener('click', function() {
   openPopup(popupAddCard); // открываем попап добавления
 });
 
-// // Закрываем попапы кликом на крестик
-// closeButtons.forEach((button) => {
-//   button.addEventListener('click', function(evt) {
-//     const button = evt.target;
-//     const popupElement = button.closest('.popup');
-//     closePopup(popupElement);
-//   });
-// });
+renderListCard(initialCards);
+formEditProfile.addEventListener('submit', formSubmitHandler);
+formAddCard.addEventListener('submit', addCardHandler);
+popupProfileEdit.addEventListener('click', clickCloseHandler);
+popupAddCard.addEventListener('click', clickCloseHandler);
+popupPhotoView.addEventListener('click', clickCloseHandler);
 
 enableValidation({
   formSelector: '.popup__form',
@@ -131,10 +128,3 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 });
-
-renderListCard(initialCards);
-formEditProfile.addEventListener('submit', formSubmitHandler);
-formAddCard.addEventListener('submit', addCardHandler);
-popupProfileEdit.addEventListener('click', clickCloseHandler);
-popupAddCard.addEventListener('click', clickCloseHandler);
-popupPhotoView.addEventListener('click', clickCloseHandler);
