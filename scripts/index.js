@@ -1,5 +1,3 @@
-// Все попапы
-const popupsList = document.querySelectorAll('.popup');
 // Попап редактирования профиля
 const popupProfileEdit = document.querySelector('.popup_type_edit-profile');
 const editProfileButton = document.querySelector('.profile__button_action_edit');
@@ -41,7 +39,7 @@ function openPopupProfile() {
 }
 
 // Настройка редактирования профиля
-function formSubmitHandler (evt) {
+function editSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileWork.textContent = workInput.value;
@@ -73,11 +71,10 @@ function closePopup(popupElement) {
 
 // Закрываем открытый попап клавишей Esc
 function keyEscapeHandler(evt) {
-  popupsList.forEach((popupElement) => {
-    if (evt.key === 'Escape' && popupElement.classList.contains('popup_opened')) {
-      closePopup(popupElement);
-    }
-  });
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 }
 
 // Закрываем попап кликом на оверлей
@@ -89,10 +86,10 @@ function clickCloseHandler(evt) {
 }
 
 function imagePreview(data) {
-  openPopup(popupPhotoView);
   popupImage.src = data.src;
   popupImage.alt = data.alt;
   popupImageCaption.textContent = data.alt;
+  openPopup(popupPhotoView);
 }
 
 function createCard({name, link}) {
@@ -128,7 +125,7 @@ function renderListCard(data) {
 // Передаем массив с карточками в функцию
 renderListCard(initialCards);
 
-formEditProfile.addEventListener('submit', formSubmitHandler);
+formEditProfile.addEventListener('submit', editSubmitHandler);
 formAddCard.addEventListener('submit', addCardHandler);
 
 editProfileButton.addEventListener('click', openPopupProfile);
