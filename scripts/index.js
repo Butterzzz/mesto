@@ -1,5 +1,15 @@
 import { initialCards } from './cards.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button_action_save',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 // Попап редактирования профиля
 const popupProfileEdit = document.querySelector('.popup_type_edit-profile');
@@ -33,7 +43,7 @@ function openPopupProfile() {
   openPopup(popupProfileEdit);
   nameInput.value = profileName.textContent;
   workInput.value = profileWork.textContent;
-  validatePopup(popupProfileEdit, config); // Валидируем попап редактирования профиля
+  formValidatorEditProfile.cleanUpErrors(); //Сбрасываем ошибки формы редактирования профиля
 }
 
 // Настройка редактирования профиля
@@ -48,7 +58,7 @@ function editSubmitHandler (evt) {
 function openPopupAdd() {
   openPopup(popupAddCard);
   formAddCard.reset()
-  validatePopup(popupAddCard, config); // Валидируем попап добавления карточки
+  formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
 }
 
 // Настройка добавления карточки
@@ -109,3 +119,11 @@ initialCards.forEach((item) => {
 
   renderCard(cardElement);
 });
+
+// Создаем экземпляр класса FormValidator для формы редактирования профиля:
+const formValidatorEditProfile = new FormValidator(config, formEditProfile);
+formValidatorEditProfile.enableValidation();
+
+// Создаем экземпляр класса FormValidator для формы добавления карточки:
+const formValidatorAddCard = new FormValidator(config, formAddCard);
+formValidatorAddCard.enableValidation();
