@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Владивосток',
     link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-01.jpg',
