@@ -1,4 +1,4 @@
-import { openPopup, popupPhotoView } from './index.js';
+import { openPopup, popupPhotoView, popupPhotoImage, popupPhotoCaption } from './utils.js';
 
 // Принимает в конструктор данные карточки и селектор её template-элемента
 export default class Card {
@@ -28,13 +28,14 @@ export default class Card {
   // Приватный метод, который удаляет элемент из DOM
   _handleElementDelete() {
     this._element.remove();
+    this._element = null;
   }
 
   // Приватный метод, который наполняет карточку и открывает попап с картинкой
   _imagePreview() {
-    popupPhotoView.querySelector('.popup__image').src = this._link;
-    popupPhotoView.querySelector('.popup__image').alt = this._name;
-    popupPhotoView.querySelector('.popup__image-caption').textContent = this._name;
+    popupPhotoImage.src = this._link;
+    popupPhotoImage.alt = this._name;
+    popupPhotoCaption.textContent = this._name;
     openPopup(popupPhotoView);
   }
 

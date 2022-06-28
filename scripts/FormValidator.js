@@ -11,6 +11,8 @@ export default class FormValidator {
     this._errorClass = config.errorClass;
 
     this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   // Приватный метод, который добавляет класс с ошибкой
@@ -33,8 +35,6 @@ export default class FormValidator {
 
   // Приватный метод, который изменяет состояние кнопки сабмита
   _toggleButtonState = () => {
-    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-
     if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.setAttribute('disabled', true);
@@ -55,8 +55,6 @@ export default class FormValidator {
 
   // Приватный метод, который проверяет все поля на валидность
   _hasInvalidInput = () => {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })

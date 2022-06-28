@@ -1,4 +1,5 @@
 import { initialCards } from './cards.js';
+import { openPopup, closePopup, popupPhotoView } from './utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
@@ -27,16 +28,8 @@ const addCardButton = document.querySelector('.profile__button_action_add');
 const formAddCard = document.forms.addCard;
 const placeInput = formAddCard.name;
 const linkInput = formAddCard.link;
-// Попап изображения
-export const popupPhotoView = document.querySelector('.popup_type_photo-view');
 // Родительский блок для карточек
 const cardsList = document.querySelector('.cards__list');
-
-// Открываем попап
-export function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened');
-  document.addEventListener('keydown', keyEscapeHandler); // Добавляем обработчик на Esc
-}
 
 // Открываем попап редактирования профиля
 function openPopupProfile() {
@@ -63,32 +56,18 @@ function openPopupAdd() {
 
 // Настройка добавления карточки
 function addCardHandler (evt) {
-  const card = new Card(placeInput.value, linkInput.value, '#card-template');
-  const cardElement = card.generateCard();
+  const cardItem = { name: placeInput.value, link: linkInput.value }
 
   evt.preventDefault();
-  renderCard((cardElement), true); // Добавляем карточку в начало
+  renderCard(createCard(cardItem), true); // Добавляем карточку в начало
   closePopup(popupAddCard);
   formAddCard.reset();
-}
-
-// Закрываем попап
-function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyEscapeHandler); // Удаляем обработчик на Esc
-}
-
-// Закрываем открытый попап клавишей Esc
-function keyEscapeHandler(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
 }
 
 // Закрываем попап кликом на оверлей
 function clickCloseHandler(evt) {
   const target = evt.target;
+
   if(target.classList.contains('popup__button_action_close') || target.classList.contains('popup_opened')) {
     closePopup(evt.currentTarget);
   };
@@ -102,6 +81,17 @@ function renderCard(cardElement, isPrepend = false) {
   }
 }
 
+function createCard(cardItem) {
+  const card = new Card(cardItem.name, cardItem.link, '#card-template');
+  const cardElement = card.generateCard();
+
+  return cardElement;
+}
+
+initialCards.forEach((cardItem) => {
+  renderCard(createCard(cardItem));
+});
+
 formEditProfile.addEventListener('submit', editSubmitHandler);
 formAddCard.addEventListener('submit', addCardHandler);
 
@@ -111,14 +101,6 @@ addCardButton.addEventListener('click', openPopupAdd);
 popupProfileEdit.addEventListener('click', clickCloseHandler);
 popupAddCard.addEventListener('click', clickCloseHandler);
 popupPhotoView.addEventListener('click', clickCloseHandler);
-
-
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, '#card-template');
-  const cardElement = card.generateCard();
-
-  renderCard(cardElement);
-});
 
 // Создаем экземпляр класса FormValidator для формы редактирования профиля:
 const formValidatorEditProfile = new FormValidator(config, formEditProfile);
