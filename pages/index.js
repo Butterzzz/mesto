@@ -1,35 +1,12 @@
-import { initialCards } from './cards.js';
-import { openPopup, closePopup, popupPhotoView } from './utils.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button_action_save',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-// Попап редактирования профиля
-const popupProfileEdit = document.querySelector('.popup_type_edit-profile');
-const editProfileButton = document.querySelector('.profile__button_action_edit');
-const profileName = document.querySelector('.profile__name');
-const profileWork = document.querySelector('.profile__work');
-// Его форма и импуты
-const formEditProfile = document.forms.editProfile;
-const nameInput = formEditProfile.elements.name;
-const workInput = formEditProfile.work;
-// Попап добавления карточек
-const popupAddCard = document.querySelector('.popup_type_add-card');
-const addCardButton = document.querySelector('.profile__button_action_add');
-// Его форма и импуты
-const formAddCard = document.forms.addCard;
-const placeInput = formAddCard.name;
-const linkInput = formAddCard.link;
-// Родительский блок для карточек
-const cardsList = document.querySelector('.cards__list');
+import { popupProfileEdit, editProfileButton, profileName, profileWork, formEditProfile, nameInput, workInput, popupAddCard, addCardButton, formAddCard, placeInput, linkInput, popupPhotoView, cardsList, initialCards, config } from '../utils/constants.js';
+import { openPopup, closePopup } from '../utils/utils.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+// import FormValidator from '../components/Section.js';
+// import FormValidator from '../components/Popup.js';
+// import FormValidator from '../components/PopupWithImage.js';
+// import FormValidator from '../components/PopupWithForm.js';
+// import FormValidator from '../components/UserInfo.js';
 
 // Открываем попап редактирования профиля
 function openPopupProfile() {

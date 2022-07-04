@@ -1,8 +1,3 @@
-// Попап изображения
-export const popupPhotoView = document.querySelector('.popup_type_photo-view');
-export const popupPhotoImage = popupPhotoView.querySelector('.popup__image');
-export const popupPhotoCaption = popupPhotoView.querySelector('.popup__image-caption');
-
 // Открываем попап
 export function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');

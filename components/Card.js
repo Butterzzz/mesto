@@ -1,8 +1,9 @@
-import { openPopup, popupPhotoView, popupPhotoImage, popupPhotoCaption } from './utils.js';
+import { popupPhotoView, popupPhotoImage, popupPhotoCaption } from '../utils/constants.js';
+import { openPopup } from '../utils/utils.js';
 
-// Принимает в конструктор данные карточки и селектор её template-элемента
 export default class Card {
 
+// Принимает в конструктор данные карточки и селектор её template-элемента
   constructor(name, link, cardSelector) {
     this._name = name;
     this._link = link;
