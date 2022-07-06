@@ -19,7 +19,7 @@ export const popupPhotoView = document.querySelector('.popup_type_photo-view');
 export const popupPhotoImage = popupPhotoView.querySelector('.popup__image');
 export const popupPhotoCaption = popupPhotoView.querySelector('.popup__image-caption');
 // Родительский блок для карточек
-export const cardsList = document.querySelector('.cards__list');
+export const cardsList = '.cards__list';
 
 export const initialCards = [
   {

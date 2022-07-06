@@ -2,11 +2,11 @@ import { popupProfileEdit, editProfileButton, profileName, profileWork, formEdit
 import { openPopup, closePopup } from '../utils/utils.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-// import FormValidator from '../components/Section.js';
-// import FormValidator from '../components/Popup.js';
-// import FormValidator from '../components/PopupWithImage.js';
-// import FormValidator from '../components/PopupWithForm.js';
-// import FormValidator from '../components/UserInfo.js';
+import Section from '../components/Section.js';
+// import Popup from '../components/Popup.js';
+// import PopupWithImage from '../components/PopupWithImage.js';
+// import PopupWithForm from '../components/PopupWithForm.js';
+// import UserInfo from '../components/UserInfo.js';
 
 // Открываем попап редактирования профиля
 function openPopupProfile() {
@@ -36,7 +36,8 @@ function addCardHandler (evt) {
   const cardItem = { name: placeInput.value, link: linkInput.value }
 
   evt.preventDefault();
-  renderCard(createCard(cardItem), true); // Добавляем карточку в начало
+  // renderCard(createCard(cardItem), true); // Добавляем карточку в начало
+  defaultCardList.setItem(cardItem);
   closePopup(popupAddCard);
   formAddCard.reset();
 }
@@ -50,24 +51,24 @@ function clickCloseHandler(evt) {
   };
 }
 
-function renderCard(cardElement, isPrepend = false) {
-  if(isPrepend) {
-    cardsList.prepend(cardElement);
-  } else {
-    cardsList.append(cardElement);
-  }
-}
+// function renderCard(cardElement, isPrepend = false) {
+//   if(isPrepend) {
+//     cardsList.prepend(cardElement);
+//   } else {
+//     cardsList.append(cardElement);
+//   }
+// }
 
-function createCard(cardItem) {
-  const card = new Card(cardItem.name, cardItem.link, '#card-template');
-  const cardElement = card.generateCard();
+// function createCard(cardItem) {
+//   const card = new Card(cardItem.name, cardItem.link, '#card-template');
+//   const cardElement = card.generateCard();
 
-  return cardElement;
-}
+//   return cardElement;
+// }
 
-initialCards.forEach((cardItem) => {
-  renderCard(createCard(cardItem));
-});
+// initialCards.forEach((cardItem) => {
+//   renderCard(createCard(cardItem));
+// });
 
 formEditProfile.addEventListener('submit', editSubmitHandler);
 formAddCard.addEventListener('submit', addCardHandler);
@@ -86,3 +87,16 @@ formValidatorEditProfile.enableValidation();
 // Создаем экземпляр класса FormValidator для формы добавления карточки:
 const formValidatorAddCard = new FormValidator(config, formAddCard);
 formValidatorAddCard.enableValidation();
+
+// Создаем экземпляр класса Section рендера массива карточек:
+const defaultCardList = new Section({
+  data: initialCards,
+  renderer: (cardItem) => {
+    const card = new Card(cardItem.name, cardItem.link, '#card-template');
+    const cardElement = card.generateCard();
+
+    defaultCardList.setItem(cardElement);
+    }
+  }, cardsList);
+
+defaultCardList.renderItems();
