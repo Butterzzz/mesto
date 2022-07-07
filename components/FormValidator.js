@@ -1,7 +1,8 @@
+// Класс,который настраивает валидацию полей формы
 export default class FormValidator {
 
   // Принимает в конструктор объект настроек с селекторами и классами формы
-  // Принимает вторым параметром элемент той формы, которая валидируется;
+  // Принимает вторым параметром элемент той формы, которая валидируется
   constructor(config, formElement) {
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
