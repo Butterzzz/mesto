@@ -2,9 +2,9 @@
 export default class UserInfo {
 
   // Принимает в конструктор объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе
-    constructor({ nameSelector, workselector }) {
+    constructor({ nameSelector, workSelector }) {
       this._profileName = document.querySelector(nameSelector);
-      this._prifileJob = document.querySelector(workselector);
+      this._profileWork = document.querySelector(workSelector);
     }
 
   // Публичный метод, который возвращает объект с данными пользователя. Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии
