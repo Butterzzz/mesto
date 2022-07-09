@@ -15,28 +15,34 @@ export default class PopupWithForm extends Popup {
 
   // Приватный метод, который собирает данные всех полей формы
     _getInputValues() {
-      const formValues = {};
+      // создаём пустой объект
+      this._formValues = {};
+      // добавляем в этот объект значения всех полей
       this._inputList.forEach((inputElement) => {
-        formValues[inputElement.name] = inputElement.value;
+        this._formValues[inputElement.name] = inputElement.value;
       });
-
-      return formValues;
+      // возвращаем объект значений
+      return this._formValues;
     }
 
   // Публичный метод, который перезаписывает родительский метод.
-  // Метод должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы
+  // Метод должен не только добавлять обработчик клика иконке закрытия,
+  // но и добавлять обработчик сабмита формы
     setEventListeners() {
       super.setEventListeners();
       this._formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
+    // добавим вызов функции _submitFormHandler
+    // передадим ей объект — результат работы _getInputValues
       this._submitFormHandler(this._getInputValues());
 
       this.close();
       });
     }
 
-  // Публичный метод, который перезаписывает родительский метод, так как при закрытии попапа форма должна ещё и сбрасываться
+  // Публичный метод, который перезаписывает родительский метод,
+  // так как при закрытии попапа форма должна ещё и сбрасываться
     close() {
       super.close();
       this._formElement.reset();
