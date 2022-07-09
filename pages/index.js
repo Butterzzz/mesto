@@ -142,7 +142,7 @@ const popupCard = new PopupWithForm(popupAddCard, (cardData) => {
   const card = new Card(cardData.name, cardData.link, '#card-template', handleCardClick);
   const cardElement = card.generateCard();
 
-  defaultCardList.setItem(cardElement);
+  defaultCardList.setItem((cardElement), true); // Добавляем карточку в начало
 });
 
 popupCard.setEventListeners();

@@ -12,8 +12,12 @@ export default class Section {
   }
 
 // Публичный метод, который принимает DOM-элемент и добавляет его в контейнер
-  setItem(element) {
-    this._container.append(element);
+  setItem(element, isPrepend = false) {
+    if(isPrepend) {
+      this._container.prepend(element);
+    } else {
+      this._container.append(element);
+    }
   }
 
 // Публичный метод, который отвечает за отрисовку всех элементов
