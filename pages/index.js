@@ -4,7 +4,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 // import Popup from '../components/Popup.js';
-// import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 // import PopupWithForm from '../components/PopupWithForm.js';
 // import UserInfo from '../components/UserInfo.js';
 
@@ -42,14 +42,14 @@ function addCardHandler (evt) {
   formAddCard.reset();
 }
 
-// Закрываем попап кликом на оверлей
-function clickCloseHandler(evt) {
-  const target = evt.target;
+// // Закрываем попап кликом на оверлей
+// function clickCloseHandler(evt) {
+//   const target = evt.target;
 
-  if(target.classList.contains('popup__button_action_close') || target.classList.contains('popup_opened')) {
-    closePopup(evt.currentTarget);
-  };
-}
+//   if(target.classList.contains('popup__button_action_close') || target.classList.contains('popup_opened')) {
+//     closePopup(evt.currentTarget);
+//   };
+// }
 
 // function renderCard(cardElement, isPrepend = false) {
 //   if(isPrepend) {
@@ -76,9 +76,9 @@ formAddCard.addEventListener('submit', addCardHandler);
 editProfileButton.addEventListener('click', openPopupProfile);
 addCardButton.addEventListener('click', openPopupAdd);
 
-popupProfileEdit.addEventListener('click', clickCloseHandler);
-popupAddCard.addEventListener('click', clickCloseHandler);
-popupPhotoView.addEventListener('click', clickCloseHandler);
+// popupProfileEdit.addEventListener('click', clickCloseHandler);
+// popupAddCard.addEventListener('click', clickCloseHandler);
+// popupPhotoView.addEventListener('click', clickCloseHandler);
 
 // Создаем экземпляр класса FormValidator для формы редактирования профиля:
 const formValidatorEditProfile = new FormValidator(config, formEditProfile);
@@ -92,7 +92,7 @@ formValidatorAddCard.enableValidation();
 const defaultCardList = new Section({
   data: initialCards,
   renderer: (cardItem) => {
-    const card = new Card(cardItem.name, cardItem.link, '#card-template');
+    const card = new Card(cardItem.name, cardItem.link, '#card-template', handleCardClick);
     const cardElement = card.generateCard();
 
     defaultCardList.setItem(cardElement);
@@ -100,3 +100,11 @@ const defaultCardList = new Section({
   }, cardsList);
 
 defaultCardList.renderItems();
+
+// Создаем экземпляр класса PopupWithImage:
+const popupWithImage = new PopupWithImage(popupPhotoView);
+popupWithImage.setEventListeners();
+
+function handleCardClick(name, link) {
+  popupWithImage.open(name, link);
+}
