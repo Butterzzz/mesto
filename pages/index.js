@@ -135,3 +135,21 @@ editProfileButton.addEventListener('click', () => {
 
   formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
 });
+
+// Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
+const popupCard = new PopupWithForm(popupAddCard, (cardData) => {
+
+  const card = new Card(cardData.name, cardData.link, '#card-template', handleCardClick);
+  const cardElement = card.generateCard();
+
+  defaultCardList.setItem(cardElement);
+});
+
+popupCard.setEventListeners();
+
+
+// Открываем попап добавления карточки кликом на соответсвующую кнопку
+addCardButton.addEventListener('click', () => {
+  popupCard.open();
+  formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
+});
