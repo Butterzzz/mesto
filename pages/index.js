@@ -1,46 +1,46 @@
 import { popupProfileEdit, editProfileButton, profileName, profileWork, formEditProfile, nameInput, workInput, popupAddCard, addCardButton, formAddCard, placeInput, linkInput, popupPhotoView, cardsList, initialCards, config } from '../utils/constants.js';
-import { openPopup, closePopup } from '../utils/utils.js';
+// import { openPopup, closePopup } from '../utils/utils.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 // import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-// import PopupWithForm from '../components/PopupWithForm.js';
-// import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
-// Открываем попап редактирования профиля
-function openPopupProfile() {
-  openPopup(popupProfileEdit);
-  nameInput.value = profileName.textContent;
-  workInput.value = profileWork.textContent;
-  formValidatorEditProfile.cleanUpErrors(); //Сбрасываем ошибки формы редактирования профиля
-}
+// // Открываем попап редактирования профиля
+// function openPopupProfile() {
+//   openPopup(popupProfileEdit);
+//   nameInput.value = profileName.textContent;
+//   workInput.value = profileWork.textContent;
+//   formValidatorEditProfile.cleanUpErrors(); //Сбрасываем ошибки формы редактирования профиля
+// }
 
-// Настройка редактирования профиля
-function editSubmitHandler (evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileWork.textContent = workInput.value;
-  closePopup(popupProfileEdit);
-}
+// // Настройка редактирования профиля
+// function editSubmitHandler (evt) {
+//   evt.preventDefault();
+//   profileName.textContent = nameInput.value;
+//   profileWork.textContent = workInput.value;
+//   closePopup(popupProfileEdit);
+// }
 
-// Открываем попап добавления карточки
-function openPopupAdd() {
-  openPopup(popupAddCard);
-  formAddCard.reset()
-  formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
-}
+// // Открываем попап добавления карточки
+// function openPopupAdd() {
+//   openPopup(popupAddCard);
+//   formAddCard.reset()
+//   formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
+// }
 
-// Настройка добавления карточки
-function addCardHandler (evt) {
-  const cardItem = { name: placeInput.value, link: linkInput.value }
+// // Настройка добавления карточки
+// function addCardHandler (evt) {
+//   const cardItem = { name: placeInput.value, link: linkInput.value }
 
-  evt.preventDefault();
-  // renderCard(createCard(cardItem), true); // Добавляем карточку в начало
-  defaultCardList.setItem(cardItem);
-  closePopup(popupAddCard);
-  formAddCard.reset();
-}
+//   evt.preventDefault();
+//   // renderCard(createCard(cardItem), true); // Добавляем карточку в начало
+//   defaultCardList.setItem(cardItem);
+//   closePopup(popupAddCard);
+//   formAddCard.reset();
+// }
 
 // // Закрываем попап кликом на оверлей
 // function clickCloseHandler(evt) {
@@ -70,11 +70,11 @@ function addCardHandler (evt) {
 //   renderCard(createCard(cardItem));
 // });
 
-formEditProfile.addEventListener('submit', editSubmitHandler);
-formAddCard.addEventListener('submit', addCardHandler);
+// formEditProfile.addEventListener('submit', editSubmitHandler);
+// formAddCard.addEventListener('submit', addCardHandler);
 
-editProfileButton.addEventListener('click', openPopupProfile);
-addCardButton.addEventListener('click', openPopupAdd);
+// editProfileButton.addEventListener('click', openPopupProfile);
+// addCardButton.addEventListener('click', openPopupAdd);
 
 // popupProfileEdit.addEventListener('click', clickCloseHandler);
 // popupAddCard.addEventListener('click', clickCloseHandler);
@@ -108,3 +108,30 @@ popupWithImage.setEventListeners();
 function handleCardClick(name, link) {
   popupWithImage.open(name, link);
 }
+
+// Создаем экземпляр класса UserInfo для попапа редактирования профиля:
+const userInfo = new UserInfo({
+  nameSelector: profileName,
+  workSelector: profileWork
+});
+
+// Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
+const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
+  const { name, work } = formData;
+
+  userInfo.setUserInfo(name, work); // Используем метод, который принимает новые данные пользователя и добавляет их на страницу
+});
+
+popupProfile.setEventListeners();
+
+// Открываем попап редактирования профиля кликом на соответсвующую кнопку
+editProfileButton.addEventListener('click', () => {
+  popupProfile.open();
+
+  const { name, work } = userInfo.getUserInfo(); // Используем метод, который возвращает объект с данными пользователя
+
+  nameInput.value = name;
+  workInput.value = work;
+
+  formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
+});
