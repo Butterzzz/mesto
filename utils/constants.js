@@ -1,23 +1,23 @@
 // Попап редактирования профиля
-export const popupProfileEdit = document.querySelector('.popup_type_edit-profile');
+export const popupProfileEdit ='.popup_type_edit-profile';
 export const editProfileButton = document.querySelector('.profile__button_action_edit');
-export const profileName = document.querySelector('.profile__name');
-export const profileWork = document.querySelector('.profile__work');
+export const profileName = '.profile__name';
+export const profileWork = '.profile__work';
 // Его форма и импуты
 export const formEditProfile = document.forms.editProfile;
 export const nameInput = formEditProfile.elements.name;
 export const workInput = formEditProfile.work;
 // Попап добавления карточек
-export const popupAddCard = document.querySelector('.popup_type_add-card');
+export const popupAddCard = '.popup_type_add-card';
 export const addCardButton = document.querySelector('.profile__button_action_add');
 // Его форма и импуты
 export const formAddCard = document.forms.addCard;
 export const placeInput = formAddCard.name;
 export const linkInput = formAddCard.link;
+
 // Попап изображения
-export const popupPhotoView = document.querySelector('.popup_type_photo-view');
-export const popupPhotoImage = popupPhotoView.querySelector('.popup__image');
-export const popupPhotoCaption = popupPhotoView.querySelector('.popup__image-caption');
+export const popupPhotoView = '.popup_type_photo-view';
+
 // Родительский блок для карточек
 export const cardsList = '.cards__list';
 
