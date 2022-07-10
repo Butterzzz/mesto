@@ -88,14 +88,27 @@ formValidatorEditProfile.enableValidation();
 const formValidatorAddCard = new FormValidator(config, formAddCard);
 formValidatorAddCard.enableValidation();
 
+
+
+// Функция создания новой карточки
+function createCard(cardItem) {
+  const card = new Card(cardItem.name, cardItem.link, '#card-template', () => {
+    popupWithImage.open(cardItem.name, cardItem.link);
+  });
+  const cardElement = card.generateCard();
+
+  return cardElement;
+}
+
+
 // Создаем экземпляр класса Section рендера массива карточек:
 const defaultCardList = new Section({
   data: initialCards,
   renderer: (cardItem) => {
-    const card = new Card(cardItem.name, cardItem.link, '#card-template', handleCardClick);
-    const cardElement = card.generateCard();
+    // const card = new Card(cardItem.name, cardItem.link, '#card-template', handleCardClick);
+    // const cardElement = card.generateCard();
 
-    defaultCardList.setItem(cardElement);
+    defaultCardList.setItem(createCard(cardItem));
     }
   }, cardsList);
 
@@ -104,10 +117,6 @@ defaultCardList.renderItems();
 // Создаем экземпляр класса PopupWithImage:
 const popupWithImage = new PopupWithImage(popupPhotoView);
 popupWithImage.setEventListeners();
-
-function handleCardClick(name, link) {
-  popupWithImage.open(name, link);
-}
 
 // Создаем экземпляр класса UserInfo для попапа редактирования профиля:
 const userInfo = new UserInfo({
@@ -137,16 +146,17 @@ editProfileButton.addEventListener('click', () => {
 });
 
 // Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
-const popupCard = new PopupWithForm(popupAddCard, (cardData) => {
+const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
 
-  const card = new Card(cardData.name, cardData.link, '#card-template', handleCardClick);
-  const cardElement = card.generateCard();
+  // const card = new Card(cardData.name, cardData.link, '#card-template', handleCardClick);
+  // const cardElement = card.generateCard();
 
-  defaultCardList.setItem((cardElement), true); // Добавляем карточку в начало
+  // defaultCardList.setItem((cardElement), true); // Добавляем карточку в начало
+
+  defaultCardList.setItem(createCard(cardItem), true);
 });
 
 popupCard.setEventListeners();
-
 
 // Открываем попап добавления карточки кликом на соответсвующую кнопку
 addCardButton.addEventListener('click', () => {
