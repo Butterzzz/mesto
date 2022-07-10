@@ -5,20 +5,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Sergei Grinchenko">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Сервис Mesto</title>
 </head>
 <body class="page">
 
   <header class="header">
-    <img class="header__logo" src="./images/header-logo.svg" alt="Логотип сервиса Mesto" >
+    <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип сервиса Mesto" >
   </header>
 
   <main class="content">
 
     <section class="profile">
 
-      <img class="profile__image" src="./images/avatar.jpg" alt="Изображение профиля">
+      <img class="profile__image" src="<%=require('./images/avatar.jpg')%>" alt="Изображение профиля">
 
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -100,6 +99,5 @@
     </article>
   </li>
 </template>
-  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

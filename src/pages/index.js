@@ -1,3 +1,4 @@
+import './index.css';
 import { popupProfileEdit, editProfileButton, profileName, profileWork, formEditProfile,
   nameInput, workInput, popupAddCard, addCardButton, formAddCard, popupPhotoView,
   cardsList, initialCards, config } from '../utils/constants.js';
