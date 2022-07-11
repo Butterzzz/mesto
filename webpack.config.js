@@ -12,7 +12,7 @@ module.exports = {
     filename: 'main.js',
     publicPath: '',
   },
-  mode: 'development', // добавили режим разработчика
+  mode: 'development',
   devServer: {
     static: path.resolve(__dirname, './dist'),
     open: true,
@@ -20,31 +20,41 @@ module.exports = {
     port: 8080
   },
   module: {
-    rules: [{ // rules — это массив правил
-        test: /\.js$/, // регулярное выражение, которое ищет все js файлы
-        use: 'babel-loader', // при обработке этих файлов нужно использовать babel-loader
-        exclude: '/node_modules/' // исключает папку node_modules, файлы в ней обрабатывать не нужно
+    rules: [{
+      test: /\.js$/, // регулярное выражение, которое ищет все js файлы
+      use: 'babel-loader', // при обработке этих файлов нужно использовать babel-loader
+      exclude: '/node_modules/' // исключает папку node_modules
+    },
+    {
+      test: /\.(png|svg|jpg|jpeg|gif)$/, // регулярное выражение, которое ищет все изображения
+      type: 'asset/resource',
+      generator: {
+        filename: 'images/[name].[hash][ext]',
+      }
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/i, // регулярное выражение, которое ищет все файлы шрифтов
+      type: 'asset/resource',
+      generator: {
+        filename: 'fonts/[name].[hash][ext]',
+      }
+    },
+    {
+      test: /\.css$/, // регулярное выражение, которое ищет все css-файлы
+      // при обработке этих файлов нужно использовать
+      // MiniCssExtractPlugin.loader и css-loader
+      use: [MiniCssExtractPlugin.loader, {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1
+        }
       },
-      {
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.css$/,
-        // при обработке этих файлов нужно использовать
-        // MiniCssExtractPlugin.loader и css-loader
-        use: [MiniCssExtractPlugin.loader, {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          'postcss-loader'
-        ]
-      },
+        'postcss-loader'
+      ]
+    },
     ]
   },
-  plugins: [ // plugins — это массив плагинов
+  plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
