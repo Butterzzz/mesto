@@ -21,11 +21,9 @@ formValidatorAddCard.enableValidation();
 // Функция создания новой карточки
 function createCard(cardItem) {
   const card = new Card(cardItem.name, cardItem.link, '#card-template', () => {
-    popupWithImage.open(cardItem.name, cardItem.link);
+    popupWithImage.open(cardItem);
   });
-  const cardElement = card.generateCard();
-
-  return cardElement;
+  return card.generateCard();
 }
 
 // Создаем экземпляр класса Section рендера массива карточек:
@@ -50,9 +48,7 @@ const userInfo = new UserInfo({
 
 // Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
 const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
-  const { name, work } = formData;
-
-  userInfo.setUserInfo(name, work); // Используем метод, который принимает новые данные пользователя и добавляет их на страницу
+  userInfo.setUserInfo(formData); // Используем метод, который принимает новые данные пользователя и добавляет их на страницу
 });
 
 popupProfile.setEventListeners();
@@ -66,7 +62,7 @@ editProfileButton.addEventListener('click', () => {
   nameInput.value = name;
   workInput.value = work;
 
-  formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
+  formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы редактирования профиля
 });
 
 // Создаем экземпляр класса PopupWithForm для попапа добавления карточки:

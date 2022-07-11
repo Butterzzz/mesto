@@ -19,7 +19,7 @@ export default class UserInfo {
     }
 
   // Публичный метод, который принимает новые данные пользователя и добавляет их на страницу
-    setUserInfo(name, work) {
+    setUserInfo({ name, work }) {
       this._profileName.textContent = name;
       this._profileWork.textContent = work;
     }

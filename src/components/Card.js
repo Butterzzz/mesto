@@ -13,18 +13,16 @@ export default class Card {
 
   // Приватный метод, который находит шаблон элемента карточки, клонирует его и возвращает
   _getTemplate() {
-      const cardElement = document
+    return document
       .querySelector(this._cardSelector)
       .content
       .firstElementChild
       .cloneNode(true);
-
-      return cardElement;
   }
 
   // Приватный метод, который меняет состояние "лайка"
   _handleElementLike() {
-    this._element.querySelector('.card__button_action_like').classList.toggle('card__button_active');
+    this._likeButton.classList.toggle('card__button_active');
   }
 
   // Приватный метод, который удаляет элемент из DOM
@@ -35,9 +33,10 @@ export default class Card {
 
   // Приватный метод, который устанавливает обработчики
   _setEventListeners() {
+    this._likeButton = this._element.querySelector('.card__button_action_like');
     this._cardImage = this._element.querySelector('.card__image');
 
-    this._element.querySelector('.card__button_action_like').addEventListener('click', () => this._handleElementLike());
+    this._likeButton.addEventListener('click', () => this._handleElementLike());
     this._element.querySelector('.card__button_action_delete').addEventListener('click', () => this._handleElementDelete());
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
