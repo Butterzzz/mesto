@@ -24,27 +24,27 @@ export const cardsList = '.cards__list';
 export const initialCards = [
   {
     name: 'Владивосток',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-01.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/src/images/card-01.jpg',
   },
   {
     name: 'Москва',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-02.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/src/images/card-02.jpg',
   },
   {
     name: 'Хабаровск',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-03.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/src/images/card-03.jpg',
   },
   {
     name: 'Благовещенск',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-04.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/src/images/card-04.jpg',
   },
   {
     name: 'Санкт-Петербург',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-05.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/src/images/card-05.jpg',
   },
   {
     name: 'Казань',
-    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/images/card-06.jpg',
+    link: 'https://raw.githubusercontent.com/Butterzzz/mesto/main/src/images/card-06.jpg',
   }
 ];
 
