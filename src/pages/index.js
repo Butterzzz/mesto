@@ -1,14 +1,24 @@
 import './index.css';
-import { popupProfileEdit, editProfileButton, profileName, profileWork, formEditProfile,
+import {
+  popupProfileEdit, editProfileButton, profileName, profileWork, formEditProfile,
   nameInput, workInput, popupAddCard, addCardButton, formAddCard, popupPhotoView,
-  cardsList, initialCards, config } from '../utils/constants.js';
+  cardsList, config
+} from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
+  headers: {
+    authorization: '47e90631-cd63-40cb-8d27-e2882de3dcef',
+    'Content-Type': 'application/json'
+  }
+});
 
 // Создаем экземпляр класса FormValidator для формы редактирования профиля:
 const formValidatorEditProfile = new FormValidator(config, formEditProfile);
@@ -26,15 +36,15 @@ function createCard(cardItem) {
   return card.generateCard();
 }
 
-// Создаем экземпляр класса Section рендера массива карточек:
-const defaultCardList = new Section({
-  data: initialCards,
-  renderer: (cardItem) => {
-    defaultCardList.setItem(createCard(cardItem));
-    }
-  }, cardsList);
+// // Создаем экземпляр класса Section рендера массива карточек:
+// const defaultCardList = new Section({
+//   data: initialCards,
+//   renderer: (cardItem) => {
+//     defaultCardList.setItem(createCard(cardItem));
+//   }
+// }, cardsList);
 
-defaultCardList.renderItems();
+// defaultCardList.renderItems();
 
 // Создаем экземпляр класса PopupWithImage:
 const popupWithImage = new PopupWithImage(popupPhotoView);
@@ -77,3 +87,24 @@ addCardButton.addEventListener('click', () => {
   popupCard.open();
   formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
 });
+
+
+// Создаем экземпляр класса Section рендера массива карточек:
+const defaultCardList = new Section({
+  renderer: (cardItem) => {
+    defaultCardList.setItem(createCard(cardItem));
+  }
+}, cardsList);
+
+// Создаём массив с промисами
+const promises = [api.getInitialCards()]
+
+// Передаём массив с промисами методу Promise.all
+Promise.all(promises)
+  .then(([initialCards]) => {
+    // console.log(initialCards); // выведем результат в консоль
+    defaultCardList.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });

@@ -1,29 +1,28 @@
 // Класс, который отвечает за отрисовку элементов на странице
 export default class Section {
 
-// Принимает в конструктор два параметра
-// объект с двумя свойствами: массив данных, которые нужно добавить на страницу при инициализации класса и функция, которая отвечает за создание и отрисовку данных на странице
-// селектор контейнера, в который нужно добавлять созданные элементы
-  constructor({ data, renderer }, containerSelector) {
-    this._initialArray = data;
+  // Принимает в конструктор два параметра
+  // функцию, которая отвечает за создание и отрисовку данных на странице
+  // селектор контейнера, в который нужно добавлять созданные элементы
+  constructor({ renderer }, containerSelector) {
     this._renderer = renderer;
 
     this._container = document.querySelector(containerSelector);
   }
 
-// Публичный метод, который принимает DOM-элемент и добавляет его в контейнер
+  // Публичный метод, который принимает DOM-элемент и добавляет его в контейнер
   setItem(element, isPrepend = false) {
-    if(isPrepend) {
+    if (isPrepend) {
       this._container.prepend(element);
     } else {
       this._container.append(element);
     }
   }
 
-// Публичный метод, который отвечает за отрисовку всех элементов
-  renderItems() {
-  this._initialArray.forEach(item => {
-    this._renderer(item);
+  // Публичный метод, который отвечает за отрисовку всех элементов
+  renderItems(items) {
+    items.forEach(item => {
+      this._renderer(item);
     });
   }
 
