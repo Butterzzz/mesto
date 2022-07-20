@@ -79,12 +79,12 @@ editProfileButton.addEventListener('click', () => {
   formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы редактирования профиля
 });
 
-// Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
-const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
-  defaultCardList.setItem(createCard(cardItem), true); // Добавляем карточку в начало
-});
+// // Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
+// const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
+//   defaultCardList.setItem(createCard(cardItem), true); // Добавляем карточку в начало
+// });
 
-popupCard.setEventListeners();
+// popupCard.setEventListeners();
 
 // Открываем попап добавления карточки кликом на соответсвующую кнопку
 addCardButton.addEventListener('click', () => {
@@ -153,3 +153,16 @@ const popupAvatar = new PopupWithForm(popupAvatarEdit, (formData) => {
 });
 
 popupAvatar.setEventListeners();
+
+// Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
+const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
+  api.postCard(cardItem)
+  .then((res) => {
+    defaultCardList.setItem(createCard(res), true); // Добавляем карточку в начало
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+});
+
+popupCard.setEventListeners();
