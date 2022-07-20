@@ -9,9 +9,7 @@ export default class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: {
-        authorization: this._headers.authorization
-      }
+      headers: this._headers
     })
       .then(res => {
         if (res.ok) {
@@ -27,9 +25,27 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: {
-        authorization: this._headers.authorization
-      }
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
+
+  // Публичный метод, который загружает информацию о пользователе на сервер
+  sendUserInfo({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
     })
       .then(res => {
         if (res.ok) {

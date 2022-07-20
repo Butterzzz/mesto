@@ -56,12 +56,12 @@ popupWithImage.setEventListeners();
 //   aboutSelector: profileAbout
 // });
 
-// Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
-const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
-  userInfo.setUserInfo(formData); // Используем метод, который принимает новые данные пользователя и добавляет их на страницу
-});
+// // Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
+// const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
+//   userInfo.setUserInfo(formData); // Используем метод, который принимает новые данные пользователя и добавляет их на страницу
+// });
 
-popupProfile.setEventListeners();
+// popupProfile.setEventListeners();
 
 // Открываем попап редактирования профиля кликом на соответсвующую кнопку
 editProfileButton.addEventListener('click', () => {
@@ -117,3 +117,16 @@ Promise.all(promises)
   .catch((err) => {
     console.log(err);
   });
+
+// Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
+const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
+  api.sendUserInfo(formData)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
+
+popupProfile.setEventListeners();
