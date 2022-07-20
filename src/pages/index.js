@@ -2,7 +2,7 @@ import './index.css';
 import {
   popupProfileEdit, editProfileButton, profileName, profileAbout, profileAvatar, formEditProfile,
   nameInput, aboutInput, popupAddCard, addCardButton, formAddCard, popupPhotoView,
-  cardsList, config
+  popupAvatarEdit, editAvatarButton, formEditAvatar, cardsList, config
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -23,6 +23,10 @@ const api = new Api({
 // Создаем экземпляр класса FormValidator для формы редактирования профиля:
 const formValidatorEditProfile = new FormValidator(config, formEditProfile);
 formValidatorEditProfile.enableValidation();
+
+// Создаем экземпляр класса FormValidator для формы редактирования аватара:
+const formValidatorEditAvatar = new FormValidator(config, formEditAvatar);
+formValidatorEditAvatar.enableValidation();
 
 // Создаем экземпляр класса FormValidator для формы добавления карточки:
 const formValidatorAddCard = new FormValidator(config, formAddCard);
@@ -130,3 +134,22 @@ const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
 });
 
 popupProfile.setEventListeners();
+
+// Открываем попап редактирования аватара кликом на соответсвующую кнопку
+editAvatarButton.addEventListener('click', () => {
+  popupAvatar.open();
+  formValidatorEditAvatar.cleanUpErrors(); // Сбрасываем ошибки формы редактирования аватара
+});
+
+// Создаем экземпляр класса PopupWithForm для попапа редактирования аватара профиля:
+const popupAvatar = new PopupWithForm(popupAvatarEdit, (formData) => {
+  api.sendUserAvatar(formData)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
+
+popupAvatar.setEventListeners();

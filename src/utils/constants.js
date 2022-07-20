@@ -19,6 +19,13 @@ export const linkInput = formAddCard.link;
 // Попап изображения
 export const popupPhotoView = '.popup_type_photo-view';
 
+// Попап изменения аватара
+export const popupAvatarEdit = '.popup_type_avatar';
+export const editAvatarButton = document.querySelector('.profile__button_action_edit-avatar');
+
+// Его форма
+export const formEditAvatar = document.forms.editAvatar;
+
 // Родительский блок для карточек
 export const cardsList = '.cards__list';
 
