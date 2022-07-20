@@ -2,11 +2,12 @@
 export const popupProfileEdit ='.popup_type_edit-profile';
 export const editProfileButton = document.querySelector('.profile__button_action_edit');
 export const profileName = '.profile__name';
-export const profileWork = '.profile__work';
+export const profileAbout = '.profile__about';
+export const profileAvatar = '.profile__image';
 // Его форма и импуты
 export const formEditProfile = document.forms.editProfile;
 export const nameInput = formEditProfile.elements.name;
-export const workInput = formEditProfile.work;
+export const aboutInput = formEditProfile.about;
 // Попап добавления карточек
 export const popupAddCard = '.popup_type_add-card';
 export const addCardButton = document.querySelector('.profile__button_action_add');

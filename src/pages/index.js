@@ -1,7 +1,7 @@
 import './index.css';
 import {
-  popupProfileEdit, editProfileButton, profileName, profileWork, formEditProfile,
-  nameInput, workInput, popupAddCard, addCardButton, formAddCard, popupPhotoView,
+  popupProfileEdit, editProfileButton, profileName, profileAbout, profileAvatar, formEditProfile,
+  nameInput, aboutInput, popupAddCard, addCardButton, formAddCard, popupPhotoView,
   cardsList, config
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
@@ -50,11 +50,11 @@ function createCard(cardItem) {
 const popupWithImage = new PopupWithImage(popupPhotoView);
 popupWithImage.setEventListeners();
 
-// Создаем экземпляр класса UserInfo для попапа редактирования профиля:
-const userInfo = new UserInfo({
-  nameSelector: profileName,
-  workSelector: profileWork
-});
+// // Создаем экземпляр класса UserInfo для попапа редактирования профиля:
+// const userInfo = new UserInfo({
+//   nameSelector: profileName,
+//   aboutSelector: profileAbout
+// });
 
 // Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
 const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
@@ -67,10 +67,10 @@ popupProfile.setEventListeners();
 editProfileButton.addEventListener('click', () => {
   popupProfile.open();
 
-  const { name, work } = userInfo.getUserInfo(); // Используем метод, который возвращает объект с данными пользователя
+  const { name, about } = userInfo.getUserInfo(); // Используем метод, который возвращает объект с данными пользователя
 
   nameInput.value = name;
-  workInput.value = work;
+  aboutInput.value = about;
 
   formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы редактирования профиля
 });
@@ -96,15 +96,24 @@ const defaultCardList = new Section({
   }
 }, cardsList);
 
+// Создаем экземпляр класса UserInfo для попапа редактирования профиля:
+const userInfo = new UserInfo({
+  nameSelector: profileName,
+  aboutSelector: profileAbout,
+  avatarSelector: profileAvatar
+});
+
 // Создаём массив с промисами
-const promises = [api.getInitialCards()]
+const promises = [api.getInitialCards(), api.getUserInfo()]
 
 // Передаём массив с промисами методу Promise.all
 Promise.all(promises)
-  .then(([initialCards]) => {
+  .then(([initialCards, userData]) => {
     // console.log(initialCards); // выведем результат в консоль
     defaultCardList.renderItems(initialCards);
+    // console.log(userData); // выведем результат в консоль
+    userInfo.setUserInfo(userData);
   })
   .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
+    console.log(err);
   });
