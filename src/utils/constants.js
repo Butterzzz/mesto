@@ -26,6 +26,9 @@ export const editAvatarButton = document.querySelector('.profile__button_action_
 // Его форма
 export const formEditAvatar = document.forms.editAvatar;
 
+// Попап подтверждения удаления карточки
+export const popupConfirmDelete = '.popup_type_delete';
+
 // Родительский блок для карточек
 export const cardsList = '.cards__list';
 
