@@ -1,6 +1,6 @@
 import Popup from './Popup.js';
 
-// Класс, который который наследуется от класса Popup
+// Класс, который наследуется от класса Popup
 // Класс должен перезаписывать родительские методы setEventListeners и close
 export default class PopupWithForm extends Popup {
 
