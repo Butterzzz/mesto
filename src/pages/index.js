@@ -21,6 +21,8 @@ const api = new Api({
   }
 });
 
+let userId;
+
 // Создаем экземпляр класса FormValidator для формы редактирования профиля:
 const formValidatorEditProfile = new FormValidator(config, formEditProfile);
 formValidatorEditProfile.enableValidation();
@@ -58,7 +60,14 @@ addCardButton.addEventListener('click', () => {
 // Создаем экземпляр класса Section рендера массива карточек:
 const defaultCardList = new Section({
   renderer: (cardItem) => {
-    defaultCardList.setItem(createCard(cardItem));
+    defaultCardList.setItem(createCard({
+      name: cardItem.name,
+      link: cardItem.link,
+      likes: cardItem.likes,
+      _id: cardItem._id,
+      userId: userId,
+      ownerId: cardItem.owner._id,
+    }));
   }
 }, cardsList);
 
@@ -75,10 +84,9 @@ const promises = [api.getInitialCards(), api.getUserInfo()]
 // Передаём массив с промисами методу Promise.all
 Promise.all(promises)
   .then(([initialCards, userData]) => {
-    // console.log(initialCards); // выведем результат в консоль
-    defaultCardList.renderItems(initialCards);
-    // console.log(userData); // выведем результат в консоль
     userInfo.setUserInfo(userData);
+    userId = userData._id;
+    defaultCardList.renderItems(initialCards);
   })
   .catch((err) => {
     console.log(err);
@@ -119,8 +127,16 @@ popupAvatar.setEventListeners();
 // Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
 const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
   api.postCard(cardItem)
-    .then((res) => {
-      defaultCardList.setItem(createCard(res), true); // Добавляем карточку в начало
+    .then(res => {
+      const card = ({
+        name: res.name,
+        link: res.link,
+        likes: res.likes,
+        _id: res._id,
+        userId: userId,
+        ownerId: res.owner._id
+      })
+      defaultCardList.setItem(createCard(card), true); // Добавляем карточку в начало
     })
     .catch((err) => {
       console.log(err);
@@ -136,8 +152,9 @@ popupConfirmDeleteCard.setEventListeners();
 
 // Функция создания новой карточки
 function createCard(cardItem) {
-  const card = new Card(cardItem.name, cardItem.link, cardItem.likes, cardItem._id, cardItem.userId, cardItem.ownerId, '#card-template',
+  const card = new Card(cardItem.name, cardItem.link, cardItem.likes, cardItem._id, userId, cardItem.ownerId, '#card-template',
     {
+
       handleCardClick: () => {
         popupWithImage.open(cardItem)
       },
@@ -145,8 +162,8 @@ function createCard(cardItem) {
       handleDeleteClick: (id) => {
         popupConfirmDeleteCard.setFormSubmitHandler(() => {
           api.deleteCard(id)
-            .then(res => {
-              card.deleteImage();
+            .then((res) => {
+              card.deleteCard();
               popupConfirmDeleteCard.close();
             })
             .catch((err) => {
