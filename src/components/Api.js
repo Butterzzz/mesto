@@ -1,8 +1,18 @@
 // Класс, который описывает запросы к серверу
 export default class Api {
-  constructor(options) {
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers
+  }
+
+  // Приватный метод, который проверяет доступность сервера
+  _checkServerResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   // Публичный метод, который подгружает начальные карточки с сервера
@@ -11,14 +21,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который подгружает начальную информацию о пользователе с сервера
@@ -27,14 +30,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который загружает информацию о пользователе на сервер
@@ -47,14 +43,7 @@ export default class Api {
         about: about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который загружает аватар пользователе на сервер
@@ -66,14 +55,7 @@ export default class Api {
         avatar: avatar
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который добавляет новую карточку на сервер
@@ -86,14 +68,7 @@ export default class Api {
         link: link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который удаляет карточку
@@ -102,14 +77,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который ставит лайк
@@ -118,14 +86,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // Публичный метод, который снимает лайк
@@ -134,14 +95,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkServerResponse);
   }
 
   // другие методы работы с API
