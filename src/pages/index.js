@@ -21,9 +21,6 @@ const api = new Api({
   }
 });
 
-let userId;
-
-
 // Создаем экземпляр класса FormValidator для формы редактирования профиля:
 const formValidatorEditProfile = new FormValidator(config, formEditProfile);
 formValidatorEditProfile.enableValidation();
@@ -36,40 +33,9 @@ formValidatorEditAvatar.enableValidation();
 const formValidatorAddCard = new FormValidator(config, formAddCard);
 formValidatorAddCard.enableValidation();
 
-// // Функция создания новой карточки
-// function createCard(cardItem) {
-//   const card = new Card(cardItem.name, cardItem.link, '#card-template', () => {
-//     popupWithImage.open(cardItem);
-//   });
-//   return card.generateCard();
-// }
-
-// // Создаем экземпляр класса Section рендера массива карточек:
-// const defaultCardList = new Section({
-//   data: initialCards,
-//   renderer: (cardItem) => {
-//     defaultCardList.setItem(createCard(cardItem));
-//   }
-// }, cardsList);
-
-// defaultCardList.renderItems();
-
 // Создаем экземпляр класса PopupWithImage:
 const popupWithImage = new PopupWithImage(popupPhotoView);
 popupWithImage.setEventListeners();
-
-// // Создаем экземпляр класса UserInfo для попапа редактирования профиля:
-// const userInfo = new UserInfo({
-//   nameSelector: profileName,
-//   aboutSelector: profileAbout
-// });
-
-// // Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
-// const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
-//   userInfo.setUserInfo(formData); // Используем метод, который принимает новые данные пользователя и добавляет их на страницу
-// });
-
-// popupProfile.setEventListeners();
 
 // Открываем попап редактирования профиля кликом на соответсвующую кнопку
 editProfileButton.addEventListener('click', () => {
@@ -83,19 +49,11 @@ editProfileButton.addEventListener('click', () => {
   formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы редактирования профиля
 });
 
-// // Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
-// const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
-//   defaultCardList.setItem(createCard(cardItem), true); // Добавляем карточку в начало
-// });
-
-// popupCard.setEventListeners();
-
 // Открываем попап добавления карточки кликом на соответсвующую кнопку
 addCardButton.addEventListener('click', () => {
   popupCard.open();
   formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
 });
-
 
 // Создаем экземпляр класса Section рендера массива карточек:
 const defaultCardList = new Section({
