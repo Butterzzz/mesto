@@ -11,6 +11,7 @@ export default class PopupWithForm extends Popup {
 
       this._formElement = this._popupElement.querySelector('.popup__form');
       this._inputList = Array.from(this._formElement.querySelectorAll('.popup__input'));
+      this.buttonElement = this._formElement.querySelector('.popup__button_action_save');
     }
 
   // Приватный метод, который собирает данные всех полей формы
