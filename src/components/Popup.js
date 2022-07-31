@@ -29,7 +29,7 @@ export default class Popup {
 
   // Публичный метод, который добавляет слушатель клика иконке закрытия попапа
   setEventListeners() {
-    this._popupElement.addEventListener('click', (evt) => {
+    this._popupElement.addEventListener('mousedown', (evt) => {
       const target = evt.target;
       if (target.classList.contains('popup__button_action_close') || target.classList.contains('popup_opened')) {
         this.close();
