@@ -94,7 +94,7 @@ Promise.all(promises)
 
 // Создаем экземпляр класса PopupWithForm для попапа редактирования профиля:
 const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
-  popupProfile.buttonElement.textContent = 'Сохранение...';
+  popupProfile.renderLoading(true);
   api.sendUserInfo(formData)
     .then((res) => {
       userInfo.setUserInfo(res);
@@ -104,7 +104,7 @@ const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
       console.log(err);
     })
     .finally(() => {
-      popupProfile.buttonElement.textContent = 'Сохранить';
+      popupProfile.renderLoading(false);
     });
 });
 
@@ -118,7 +118,7 @@ editAvatarButton.addEventListener('click', () => {
 
 // Создаем экземпляр класса PopupWithForm для попапа редактирования аватара профиля:
 const popupAvatar = new PopupWithForm(popupAvatarEdit, (formData) => {
-  popupAvatar.buttonElement.textContent = 'Сохранение...';
+  popupAvatar.renderLoading(true);
   api.sendUserAvatar(formData)
     .then((res) => {
       userInfo.setUserInfo(res);
@@ -128,7 +128,7 @@ const popupAvatar = new PopupWithForm(popupAvatarEdit, (formData) => {
       console.log(err);
     })
     .finally(() => {
-      popupAvatar.buttonElement.textContent = 'Сохранить';
+      popupAvatar.renderLoading(false);
     });
 });
 
@@ -136,7 +136,7 @@ popupAvatar.setEventListeners();
 
 // Создаем экземпляр класса PopupWithForm для попапа добавления карточки:
 const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
-  popupCard.buttonElement.textContent = 'Сохранение...';
+  popupCard.renderLoading(true);
   api.postCard(cardItem)
     .then(res => {
       const card = ({
@@ -154,7 +154,7 @@ const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
       console.log(err);
     })
     .finally(() => {
-      popupCard.buttonElement.textContent = 'Создать';
+      popupCard.renderLoading(false);
     });
 });
 
