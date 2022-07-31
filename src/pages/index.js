@@ -48,13 +48,13 @@ editProfileButton.addEventListener('click', () => {
   nameInput.value = name;
   aboutInput.value = about;
 
-  formValidatorEditProfile.cleanUpErrors(); // Сбрасываем ошибки формы редактирования профиля
+  formValidatorEditProfile.resetValidation(); // Сбрасываем ошибки формы редактирования профиля
 });
 
 // Открываем попап добавления карточки кликом на соответсвующую кнопку
 addCardButton.addEventListener('click', () => {
   popupCard.open();
-  formValidatorAddCard.cleanUpErrors(); // Сбрасываем ошибки формы добавления карточки
+  formValidatorAddCard.resetValidation(); // Сбрасываем ошибки формы добавления карточки
 });
 
 // Создаем экземпляр класса Section рендера массива карточек:
@@ -112,7 +112,7 @@ popupProfile.setEventListeners();
 // Открываем попап редактирования аватара кликом на соответсвующую кнопку
 editAvatarButton.addEventListener('click', () => {
   popupAvatar.open();
-  formValidatorEditAvatar.cleanUpErrors(); // Сбрасываем ошибки формы редактирования аватара
+  formValidatorEditAvatar.resetValidation(); // Сбрасываем ошибки формы редактирования аватара
 });
 
 // Создаем экземпляр класса PopupWithForm для попапа редактирования аватара профиля:

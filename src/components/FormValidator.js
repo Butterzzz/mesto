@@ -75,7 +75,7 @@ export default class FormValidator {
   }
 
   // Публичный метод, который сбрасывает ошибки формы
-  cleanUpErrors = () => {
+  resetValidation = () => {
 
     this._toggleButtonState();
 
