@@ -98,6 +98,7 @@ const popupProfile = new PopupWithForm(popupProfileEdit, (formData) => {
   api.sendUserInfo(formData)
     .then((res) => {
       userInfo.setUserInfo(res);
+      popupProfile.close();
     })
     .catch((err) => {
       console.log(err);
@@ -121,6 +122,7 @@ const popupAvatar = new PopupWithForm(popupAvatarEdit, (formData) => {
   api.sendUserAvatar(formData)
     .then((res) => {
       userInfo.setUserInfo(res);
+      popupAvatar.close();
     })
     .catch((err) => {
       console.log(err);
@@ -146,6 +148,7 @@ const popupCard = new PopupWithForm(popupAddCard, (cardItem) => {
         ownerId: res.owner._id
       })
       defaultCardList.setItem(createCard(card), true); // Добавляем карточку в начало
+      popupCard.close();
     })
     .catch((err) => {
       console.log(err);
